@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entity Relationship</title>
+  <meta name="description" content="Interactive entity-relationship diagram or data model diagram implemented by GoJS in JavaScript for HTML."
+  />
+  <meta charset="UTF-8">
+  <script src="https://lib.arvancloud.com/ar/gojs/1.8.9/go.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script id="code">
+    var MAKE = go.GraphObject.make;
+    var bluegrad = MAKE(go.Brush, "Linear", { 0: "rgb(150, 150, 250)", 0.5: "rgb(86, 86, 186)", 1: "rgb(86, 86, 186)" });
+    var greengrad = MAKE(go.Brush, "Linear", { 0: "rgb(158, 209, 159)", 1: "rgb(67, 101, 56)" });
+    var redgrad = MAKE(go.Brush, "Linear", { 0: "rgb(206, 106, 100)", 1: "rgb(180, 56, 50)" });
+    var yellowgrad = MAKE(go.Brush, "Linear", { 0: "rgb(254, 221, 50)", 1: "rgb(254, 182, 50)" });
+    var lightgrad = MAKE(go.Brush, "Linear", { 1: "#E6E6FA", 0: "#FFFAF0" });
+
+    var nodeDataArray = [
+      {
+        key: "Products",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "Suppliers",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "Categories",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "Order Details",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "Products12",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "Suppliers45",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "Categorie56s",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "Order Details78",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "Products78",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "Suppliers9",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "Categories+5",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "Order Details89",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "Products45",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "Suppliers746",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "Categories56",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "Order Details78",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      }, {
+        key: "Order Details4",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "Products142",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "Suppliers415",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "Categorie456s",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "Order Details178",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "Products478",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "Suppliers19",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "Categories4+5",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "Order Details189",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "Products445",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "Suppliers1746",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "Categories456",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "Order Details178",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "1Products",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "1Suppliers",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "1Categories",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "1Order Details",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "1Products12",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "1Suppliers45",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "1Categorie56s",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "1Order Details78",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "1Products78",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "1Suppliers9",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "1Categories+5",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "1Order Details89",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "1Products45",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "1Suppliers746",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "1Categories56",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "1Order Details78",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      }, {
+        key: "1Order Details4",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "1Products142",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "1Suppliers415",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "1Categorie456s",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "1Order Details178",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "1Products478",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "1Suppliers19",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "1Categories4+5",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "1Order Details189",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      },
+      {
+        key: "1Products445",
+        items: [{ name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "SupplierID", iskey: false, figure: "Decision", color: "purple" },
+        { name: "CategoryID", iskey: false, figure: "Decision", color: "purple" }]
+      },
+      {
+        key: "1Suppliers1746",
+        items: [{ name: "SupplierID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CompanyName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "ContactName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Address", iskey: false, figure: "Cube1", color: bluegrad }]
+      },
+      {
+        key: "1Categories456",
+        items: [{ name: "CategoryID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "CategoryName", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Description", iskey: false, figure: "Cube1", color: bluegrad },
+        { name: "Picture", iskey: false, figure: "TriangleUp", color: redgrad }]
+      },
+      {
+        key: "1Order Details178",
+        items: [{ name: "OrderID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "ProductID", iskey: true, figure: "Decision", color: yellowgrad },
+        { name: "UnitPrice", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Quantity", iskey: false, figure: "MagneticData", color: greengrad },
+        { name: "Discount", iskey: false, figure: "MagneticData", color: greengrad }]
+      }
+    ];
+    var linkDataArray = [
+      { from: "Products", to: "Suppliers", text: "0..N", toText: "1" },
+      { from: "Products", to: "Categories", text: "0..N", toText: "1" },
+      { from: "Order Details", to: "Products", text: "0..N", toText: "1" }
+    ];
+    function loadNode() {
+      console.log('loadNode');
+      var nodeDataArraySelected = [];
+      for (i = 0; i < $('input').length; i++) {
+        if ($('input')[i].checked) {
+          console.log($('input')[i].value);
+          nodeDataArraySelected.push(nodeDataArray.find(item => item.key === $('input')[i].value));
+        }
+      }
+      console.log(nodeDataArraySelected);
+      myDiagram.model = new go.GraphLinksModel(nodeDataArraySelected, []);
+    }
+
+    function loadAllNode() {
+      console.log('loadAllNode');
+      myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+    }
+
+    function init() {
+      if (window.goSamples) goSamples();
+      var MAKE = go.GraphObject.make;
+      myDiagram =
+        MAKE(go.Diagram, "myDiagramDiv",
+          {
+            initialContentAlignment: go.Spot.Center,
+            initialAutoScale: go.Diagram.Uniform,
+            allowDelete: false,
+            allowCopy: false,
+            layout: MAKE(go.ForceDirectedLayout),
+            "undoManager.isEnabled": true
+          });
+
+      var itemTempl =
+        MAKE(go.Panel, "Horizontal",
+          MAKE(go.Shape,
+            { desiredSize: new go.Size(10, 10) },
+            new go.Binding("figure", "figure"),
+            new go.Binding("fill", "color")),
+          MAKE(go.TextBlock,
+            {
+              stroke: "#333333",
+              font: "bold 14px sans-serif"
+            },
+            new go.Binding("text", "name"))
+        );
+
+      myDiagram.nodeTemplate =
+        MAKE(go.Node, "Auto",
+          {
+            selectionAdorned: true,
+            resizable: true,
+            layoutConditions: go.Part.LayoutStandard & ~go.Part.LayoutNodeSized,
+            fromSpot: go.Spot.AllSides,
+            toSpot: go.Spot.AllSides,
+            isShadowed: true,
+            shadowColor: "#C5C1AA"
+          },
+          new go.Binding("location", "location").makeTwoWay(),
+          new go.Binding("desiredSize", "visible", function (v) { return new go.Size(NaN, NaN); }).ofObject("LIST"),
+
+          MAKE(go.Shape, "Rectangle",
+            { fill: lightgrad, stroke: "#756875", strokeWidth: 3 }),
+          MAKE(go.Panel, "Table",
+            { margin: 8, stretch: go.GraphObject.Fill },
+            MAKE(go.RowColumnDefinition, { row: 0, sizing: go.RowColumnDefinition.None }),
+            MAKE(go.TextBlock,
+              {
+                row: 0, alignment: go.Spot.Center,
+                margin: new go.Margin(0, 14, 0, 2),
+                font: "bold 16px sans-serif"
+              },
+              new go.Binding("text", "key")),
+            MAKE("PanelExpanderButton", "LIST",
+              { row: 0, alignment: go.Spot.TopRight }),
+            MAKE(go.Panel, "Vertical",
+              {
+                name: "LIST",
+                row: 1,
+                padding: 3,
+                alignment: go.Spot.TopLeft,
+                defaultAlignment: go.Spot.Left,
+                stretch: go.GraphObject.Horizontal,
+                itemTemplate: itemTempl
+              },
+              new go.Binding("itemArray", "items"))
+          )
+        );
+
+      myDiagram.linkTemplate =
+        MAKE(go.Link,
+          {
+            selectionAdorned: true,
+            layerName: "Foreground",
+            reshapable: true,
+            routing: go.Link.AvoidsNodes,
+            corner: 5,
+            curve: go.Link.JumpOver
+          },
+          MAKE(go.Shape,
+            { stroke: "#303B45", strokeWidth: 2.5 }),
+          MAKE(go.TextBlock,
+            {
+              textAlign: "center",
+              font: "bold 14px sans-serif",
+              stroke: "#1967B3",
+              segmentIndex: 0,
+              segmentOffset: new go.Point(NaN, NaN),
+              segmentOrientation: go.Link.OrientUpright
+            },
+            new go.Binding("text", "text")),
+          MAKE(go.TextBlock,
+            {
+              textAlign: "center",
+              font: "bold 14px sans-serif",
+              stroke: "#1967B3",
+              segmentIndex: -1,
+              segmentOffset: new go.Point(NaN, NaN),
+              segmentOrientation: go.Link.OrientUpright
+            },
+            new go.Binding("text", "toText"))
+        );
+      layout();
+      myDiagram.model = new go.GraphLinksModel([], []);
+    }
+
+    function layout() {
+      myDiagram.startTransaction("changed Layout");
+      var lay = myDiagram.layout;
+      lay.maxIterations = 100;
+      lay.epsilon = 1;
+      lay.infinity = 100;
+      lay.defaultSpringStiffness = 0.05;
+      lay.defaultSpringLength = 20;
+
+      lay.infinityDistance = 100;
+      lay.defaultElectricalCharge = 100;
+      lay.defaultGravitationalMass = 0;
+      myDiagram.commitTransaction("changed Layout");
+    }
+  </script>
+</head>
+
+<body onload="init()">
+  <div id="sample">
+
+    <div style="float: left; width: 20%; ">
+
+      <div>
+        <input type="checkbox" id="Products" value="Products">
+        <label for="Products">Products</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Suppliers" value="Suppliers">
+        <label for="Suppliers">Suppliers</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Categories" value="Categories">
+        <label for="Categories">Categoriess</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Order Details" value="Order Details">
+        <label for="Order Details">Order Details</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Products12" value="Products12">
+        <label for="Products12">Products12</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Suppliers45" value="Suppliers45">
+        <label for="Suppliers45">Suppliers45</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Categorie56s" value="Categorie56s">
+        <label for="Categorie56s">Categorie56s</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Order Details78" value="Order Details78">
+        <label for="Order Details78">Order Details78</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Products78" value="Products78">
+        <label for="Products78">Products78</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Suppliers9" value="Suppliers9">
+        <label for="Suppliers9">Suppliers9</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Categories+5" value="Categories+5">
+        <label for="Categories+5">Categories+5</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Order Details89" value="Order Details89">
+        <label for="Order Details89">Order Details89</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Products45" value="Products45">
+        <label for="Products45">Products45</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Suppliers746" value="Suppliers746">
+        <label for="Suppliers746">Suppliers746</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Categories56" value="Categories56">
+        <label for="Categories56">Categories56</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Order Details78" value="Order Details78">
+        <label for="Order Details78">Order Details78</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Order Details4" value="Order Details4">
+        <label for="Order Details4">Order Details4</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Products142" value="Products142">
+        <label for="Products142">Products142</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Suppliers415" value="Suppliers415">
+        <label for="Suppliers415">Suppliers415</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Categorie456s" value="Categorie456s">
+        <label for="Categorie456s">Categorie456s</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Order Details178" value="Order Details178">
+        <label for="Order Details178">Order Details178</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Products478" value="Products478">
+        <label for="Products478">Products478</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Suppliers19" value="Suppliers19">
+        <label for="Suppliers19">Suppliers19</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Categories4+5" value="Categories4+5">
+        <label for="Categories4+5">Categories4+5</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Order Details189" value="Order Details189">
+        <label for="Order Details189">Order Details189</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Products445" value="Products445">
+        <label for="Products445">Products445</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Categories456" value="Categories456">
+        <label for="Categories456">Categories456</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Order Details178" value="Order Details178">
+        <label for="Order Details178">Order Details178</label>
+      </div>
+      <br>
+      <div>
+        <button onclick="loadNode()">SELECT</button>
+        <button onclick="loadAllNode()">ALL</button>
+      </div>
+
+    </div>
+    <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; margin-left: 20%; width: 70%; height: 700px"></div>
+    <p>Sample for representing the relationship between various entities. Try dragging the nodes -- their links will avoid other
+      nodes, by virtue of the
+      <a>Link.AvoidsNodes</a> property assigned to the custom link template's
+      <a>Link.routing</a>. Also note the use of
+      <a href="../intro/buttons.html" target="_blank">Panel Expander Buttons</a> to allow for expandable/collapsible node data.
+    </p>
+    <p>Buttons are defined in
+      <a href="../extensions/Buttons.js">Buttons.js</a>.</p>
+  </div>
+</body>
+
+</html>
