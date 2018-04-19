@@ -502,7 +502,6 @@
             isShadowed: true,
             shadowColor: "#C5C1AA"
           },
-          new go.Binding("location", "location").makeTwoWay(),
           new go.Binding("desiredSize", "visible", function (v) { return new go.Size(NaN, NaN); }).ofObject("LIST"),
 
           MAKE(go.Shape, "Rectangle",
